@@ -7,11 +7,12 @@ import { UsersState } from './shared/users.state';
 import { usersStore } from './shared/users.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {UsersEffects} from './shared/users.effects';
+import { UserComponent } from './user/user.component';
 
 export const usersStoreToken = new InjectionToken<ActionReducerMap<UsersState>>('usersStore');
 
 @NgModule({
-  declarations: [UserListComponent],
+  declarations: [UserListComponent, UserComponent],
   providers: [
     { provide: usersStoreToken, useValue: usersStore }
   ],

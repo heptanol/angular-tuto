@@ -3,7 +3,7 @@
 </p>
 <ul>
   <li *ngFor="let user of (usersFromStore$ | async)">
-    {{ user.firstName }} {{ user.lastName }}
+    <app-user [user]="user"></app-user>
   </li>
 </ul>
 <button (click)="send()">send</button>
