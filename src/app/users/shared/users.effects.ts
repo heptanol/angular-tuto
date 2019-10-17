@@ -15,7 +15,7 @@ export class UsersEffects {
   @Effect()
   fetchClients$ = this.actions$.pipe(
     ofType(USERS_FETCH_ALL),
-    switchMap(() => this.service.getUsers()
+    switchMap(() => this.service.fetchUsers()
       .pipe(
         map((users: User[]) => new UserFetchAllSuccessAction(users)),
         catchError((error: Error) => of(new UserFetchAllErrorAction(error)))

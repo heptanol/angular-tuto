@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { timer } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import { UsersService } from '../shared/users.service';
 import { User } from '../shared/user.model';
-import { UserFetchAllAction } from '../shared/users.actions';
-import { UsersStateHelper } from '../shared/users.state';
 
 @Component({
   selector: 'app-user-list',
@@ -13,20 +11,19 @@ import { UsersStateHelper } from '../shared/users.state';
   styleUrls: ['./user-list.component.sass']
 })
 export class UserListComponent implements OnInit {
-  usersFromStore$: Observable<User[]>;
+  users: User[];
 
   constructor(
-    private service: UsersService,
-    private state: UsersStateHelper,
-    private store: Store<any>
+    private service: UsersService
   ) { }
 
   ngOnInit() {
-    this.usersFromStore$ = this.state.getUsers();
+    this.fetchUsers();
   }
 
-  send() {
-    this.store.dispatch(new UserFetchAllAction());
+  fetchUsers() {
+    timer(0, 10000).pipe(
+      switchMap(() => this.service.fetchUsers())
+    ).subscribe((users: User[]) => this.users = users);
   }
-
 }

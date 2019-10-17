@@ -9,7 +9,7 @@ export class UsersService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers(): Observable<any> {
+  fetchUsers(): Observable<any> {
     return this.http.get('https://my-json-server.typicode.com/heptanol/json-server/users');
   }
 }

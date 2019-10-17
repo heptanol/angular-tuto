@@ -7,13 +7,27 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { UsersModule } from './users/users.module';
+import {RouterModule, Routes} from '@angular/router';
+import {UserListComponent} from './users/user-list/user-list.component';
+import { OtherComponent } from './other/other.component';
 
+
+const appRoutes: Routes = [
+  { path: 'user', component: UserListComponent },
+  { path: 'other', component: OtherComponent },
+  { path: '',
+    redirectTo: '/user',
+    pathMatch: 'full'
+  },
+  ];
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    OtherComponent
   ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot(appRoutes, { enableTracing: true }),
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
