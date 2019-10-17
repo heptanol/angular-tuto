@@ -2,7 +2,7 @@
   user-list works!
 </p>
 <ul>
-  <li *ngFor="let user of users">
+  <li *ngFor="let user of (users$ | async)">
     <app-user [user]="user"></app-user>
   </li>
 </ul>
